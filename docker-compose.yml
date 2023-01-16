@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  db:
+    build:
+      context: .
+      dockerfile: docker/.dockerfile
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: devbookapi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/dbdata
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:
